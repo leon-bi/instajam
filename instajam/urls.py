@@ -15,10 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings
+from django.contrib.auth import views as auth_views
+
 
 
 urlpatterns = [
     path('',include('insta.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/',auth_views.LogoutView.as_view(next_page=settings.LOGOUT_REDIRECT_URL)),
+    path('tinymce',include('tinymce.urls')),
+        
 ]
 
