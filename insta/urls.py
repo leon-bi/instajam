@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('',views.index, name ='index'),
     path('profile/<int:id>/',views.profile,name='profile'),
-    path(r'post/(\d+)',views.post,name="post"),
+    path('post/<int:id>/',views.post,name="post"),
     path(r'search',views.search,name='search'),
     path('like',views.like,name='like'),
     

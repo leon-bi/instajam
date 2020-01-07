@@ -28,7 +28,7 @@
         <section class="icons-section">
             <a href="#" class="far fa-compass"></a>
             <a href="{%url 'index'%}" class="far fa-heart"></a>
-            <a href="{%url 'profile' user.id %}" class="far fa-user"></a>
+            <a href="{% url 'profile' user.id%}" class="far fa-user"></a>
 
             {% if user.is_authenticated %}
             <ul>

@@ -11,8 +11,6 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/accounts/login')
 def index(request):
     current_user = request.user
-    id= current_user
-
     current_profile = UserProfile.objects.filter(user = request.user)  
     posts = Post.objects.all()[::-1]
     comments = Comment.objects.all()
@@ -34,10 +32,10 @@ def index(request):
 
 
 def post(request,id):
-    post = Post.objects.get(id=id)
+    post = Post.objects.get(id=id)     
     comments = Comment.objects.filter(post__id=id)
     current_user = request.user
-    #current_profile=UserProfile.objects.get(id__id = current_user)
+    current_profile = UserProfile.objects.filter(user = request.user)  
 
     if request.method == "POST":
         comment_form = CommentForm(request.post)
@@ -89,7 +87,7 @@ def search(request):
 @login_required
 def profile(request, id):
 
-    user = User.objects.filter(id=id)
+    user = User.objects.get(id=id)
     profile = UserProfile.objects.filter(user = request.user) 
     posts = Post.objects.filter(profile__id=id)[::-1]
     p_form= UserProfileForm()

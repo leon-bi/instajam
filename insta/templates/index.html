@@ -1,6 +1,6 @@
 {%extends "base.html"%}
 {% load static %}
-{% load crispy_forms_tags %}
+
 
 
 {% block content %}
@@ -59,15 +59,21 @@
                 </div>
 
 
-                {% if post.image %}
-                <img src=" {{post.image.url}} " alt="" class="image-fluid" style="width: auto; height:400px;">
-                {% endif %}
+                
+                <div class="view overlay">
+                    {% if post.image %}
+                    <a href="{%url 'post' post.id %}"><img class="card-img-top" src=" {{post.image.url}} "  alt="" class="image-fluid" style="width: auto; height:400px;"></a> 
+                     {% endif %}
+                         <a href="{%url 'post' post.id %}">
+                      <div class="mask rgba-white-slight"></div>
+                    </a>
+                  </div>
 
                 <div class="card-body">
                     <a href="{%url 'like'  %}">
                         <i class="far fa-heart fa-lg" style="font-size: 30px; margin-right:10px; color:#fa6161"></i>
                     </a>
-                    <a href="{%url 'post'  %}">
+                    <a href="{%url 'post' post.id %}">
                         <i class="far fa-comment fa-lg" style="font-size: 30px;"></i>
                     </a>
                 </div>

@@ -1,6 +1,7 @@
  
 {%extends "base.html"%}
 {%load bootstrap4%}
+{%load static %}
 
 {%block content%}
 
@@ -8,11 +9,13 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="card">
-                <img src="{{post.image.cdn_url}}" alt="" class="img-fluid">
+                {% if post.image %}
+                <img src="{{post.image.url}}" alt="" class="img-fluid">
+                {% else%}
+                <h1>No Image</h1>
+                {% endif %}
             </div>
-
-        </div>
-        <div class="col-lg-4">
+            <div class="col-lg-4">
             <div style="display: flex;">
                 <img src="{{post.user_profile.profile_pic}}" alt="profile pic" style="border-radius: 50%;" width="32"
                     height="32" class="img-fluid">
@@ -25,18 +28,24 @@
             {%for comment in comments%}
             <p><span style="font-weight: bolder;">{{comment.user.username}}</span> {{comment.comment}}</p>
             {%endfor%}
-            <a href="{%url 'like_post' post.id%}">
+            <a href="">
                 <i class="far fa-heart fa-lg" style="font-size: 30px; margin-right:10px; color:#fa6161"></i>
             </a>
             <i class="far fa-comment fa-lg" style="font-size: 30px;"></i>
             <p class="ml-2" style="font-weight: bolder; margin-top:10px">{{post.likes}} likes</p>
             <p class="ml-2 text-muted">{{post.date|timesince|upper}}</p>
+
             <form class="" action="{%url 'post' post.id%}" style="border:none; padding:0; display:flex" method="POST">
                 {%csrf_token%}
                 {{comment_form}}
                 <button style="border:none; border-radius:0; font-weight:bold; padding:10px;">Post</button>
             </form>
         </div>
+    </div>
+</div>
+
+        </div>
+       
     </div>
 </div>
 
