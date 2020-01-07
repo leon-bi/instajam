@@ -1,6 +1,6 @@
 from .models import Post
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse,HttpResponseRedirect
+from django.shortcuts import render, redirect, reverse
 from .models import Post, User, UserProfile, Comment
 from .forms import PostForm, CommentForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
@@ -72,7 +72,7 @@ def search(request):
             posts = Post.objects.filter(profile__id=searched_user.id)[::-1]
             message = "{}".format(search_term)
         except DoesNotExist:
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("index")) 
         
         return render(request, "search_results.html", context={"message":message,
                                                                         "users":searched_user,
